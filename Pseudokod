@@ -1,0 +1,78 @@
+# Start pos (nrow+ncol)*2
+# first code pos ncol+1
+
+# Funkar bara för första #
+if barcode > ncol + 1:
+    set_motors(0,1)
+else:
+    set_motors(1,1)
+##################################
+
+0 < VÄRDE <= y >> Norr
+
+y < VÄRDE <= x + y >> Öst
+
+x + y < VÄRDE <= 2x + y >> Söder
+
+2x + y < VÄRDE <= 2x + 2y >> Väst
+
+
+#                     3x4
+
+#                1     2    3=y
+#   2x+2y=14_____|_____|_____|_____4: (X0, Y4)
+#                |     |     |
+# (X2,Y0):13_____|_____|_____|_____5
+#                |     |     |
+#         12_____|_____|_____|_____6: (X3, Y4)
+#                |     |     |
+#         11_____|_____|_____|_____7 = x + y
+#                |     |     |
+#               10     9     8
+#             = 2x+y      (X5, Y3)
+
+
+if Y_pos_nu = Y_pos_sen or
+    X_pos_nu = X_pos_sen:
+    set_motors(1,1) #rakt fram
+else
+    'följ kod för vanlig navigering'
+
+
+
+
+# Summera passerade linjer
+n = 0
+while True:
+ #True = någon sensoravläsning
+    lines_passed += 1
+    print(lines_passed)
+
+
+                            #####
+# Hur gör vi med antalet passerade linjer om den går tillbaka?
+# Om roboten kör rakt fram (eller backar, beroende på hur man ser det), summera ej linjer
+                            #####
+
+
+# Vänster om barcode_nr är högre än nuvarande, annars åk tillbaka rakt fram
+if barcode_nr > lines_passed:
+    set_motors(0,1) # vänster
+else:
+    set_motors(1,1) and not count # rakt fram
+
+
+# Sväng in vänster vid rätt nummer annars fortsätt
+if barcode_nr = lines_passed:
+    set_motors(0,1) # vänster
+elif barcode = 'Ett hörn där roboten ska rakt fram':
+    set_motors(1,1) #rakt fram
+elif barcode = 'Ett annat hörn där roboten ska rakt fram':
+    set_motors(1,1) #rakt fram
+.
+.
+.
+else:
+    set_motors(1,0) #höger
+
+
